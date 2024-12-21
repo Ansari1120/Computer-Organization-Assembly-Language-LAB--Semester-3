@@ -1,0 +1,35 @@
+
+; You may customize this and other start-up templates; 
+; The location of this template is c:\emu8086\inc\0_com_template.txt
+
+org 100h
+
+.model small
+.data   
+
+A db 10,13, 'your number of characters are : $'
+.code
+
+main proc 
+    mov bl,48
+    
+    k:
+    mov ah,01
+    int 21h
+    inc bl
+    cmp al,20h
+    je b
+    
+    loop k
+    
+    b:   
+    mov dx, offset A
+    mov ah,09h
+    int 21h
+    
+    mov dl,bl 
+    
+    mov ah,02h
+    int 21h
+
+ret
